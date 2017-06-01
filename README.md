@@ -4,7 +4,7 @@
 
 [PyData London 2017](https://pydata.org/london2017/)
 
-Sunday, 8 May, 11am
+Sunday, 7 May, 11am
 
 * Slides: <http://rpubs.com/arowan/bayesian_deep_learning>
 
