@@ -6,7 +6,7 @@ output:
   ioslides_presentation:
     css: my_css.css
     widescreen: yes
-  beamer_presentation: default
+    
 ---
 
 ## Roadmap 
@@ -34,10 +34,10 @@ output:
 - Deep Reinforcement Learning: represent Q-value functions, which estimate quality of an agent's next action, as deep neural networks
 
 </div>
-<!-- graph of a DNN -->
+
 
 ## Drawbacks of Standard Deep Learning 
-<!--learn point estimates of network weights-->
+
 
 >- Neural networks compute point estimates
 
@@ -90,9 +90,9 @@ A Bayesian neural network is a neural network with a prior distribution on the w
 
 - Data $\mathcal{D} = \{\mathbf{X}_i, y_i \}_{i=1}^{N}$ for input data point $\mathbf{X}_i \in \mathbb{R}^d$ and output $y_i \in \mathbb{R}$.
 
-- Parameters: network weights $\mathbf{w}$ and biases $b$. <!-- http://edwardlib.org/tutorials/bayesian-neural-network -->
+- Parameters: network weights $\mathbf{w}$ and biases $b$. 
 
-<!-- - In the Bayesian approach we put **priors** on our latent variables to reflect our uncertainty in their values  --> <!--$p(\mathbf{w})$ and $p(\mathbf{b})$.--> 
+
 
 - For Bayesian neural networks **normal priors** are often used: $p(\mathbf{w)} =  \mathcal{N}(\mu, \Sigma)$ <!--Check this expression -->
 
@@ -140,7 +140,7 @@ A Bayesian neural network is a neural network with a prior distribution on the w
 **NIPS 2016:** bayesiandeeplearning.org
 
 ## Modern Revival: Bayesian Deep Learning 
-<!-- list papers here --> 
+
 <div class="small_cite">
 - *Practical Variational Inference for Neural Networks*, A Graves, NIPS 2011. 
 
@@ -156,7 +156,7 @@ A Bayesian neural network is a neural network with a prior distribution on the w
 </div>
 
 See Yarin Gal's PhD thesis: *Uncertainty in Deep Learning*, University of Cambridge (2016)
-<!--Diagram of an NN? Assume you know what this is. -->
+
 
 # Probabilistic Programming with Edward
 
@@ -165,7 +165,7 @@ See Yarin Gal's PhD thesis: *Uncertainty in Deep Learning*, University of Cambri
 <!---Dan Roy: https://www.youtube.com/watch?v=TFXcVlKqPlM--->
 - Represent probabilistic models as **programs** that generate **samples**
 
-<!---mention something about program traces--->
+
 - Automate inference of **unobserved** variables in the model **conditioned** on observed progam output 
 
 - **Probabilistic Programming Languages** (PPLs): Church, Venture, Anglican, Figaro, WebPPL, Stan, PyMC3, Edward etc.
@@ -173,7 +173,7 @@ See Yarin Gal's PhD thesis: *Uncertainty in Deep Learning*, University of Cambri
 <!---- Programs allow stochastic control flow, PGMs are a subset--->
 - Many PPLs treat inference as a **black box** abstracted away from model
 
-<!-- A universal inference engine (give some examples).  Hide details to make probabilistic modeling more accessible to the working programmer. But can scale poorly. -->
+
 - Separation of model and inference: harder to represent some recent advances, e.g. Generative Adversarial Networks <!--Edward supports non-Bayesian methods such as generative adversarial networks (GANs)--> 
 
 >- <div class="blue2"> **Expressivity versus Scalability trade-off** </div>
@@ -238,13 +238,13 @@ Edward's **Random Variables** are **class objects** with methods: ```log_prob()`
 ## Edward | Expressivity and Scalability 
 
 - Allows composition of Models *and* of Inference methods for greater **expressivity**
-<!---Mention Inference as a first class citizen--->
-<!---can implement recent models like GANs, VAEs more easily--->
+
+
 
 - Allows data subsampling for greater **scalability**
 
-<!--- ADVI in pymc3 and Stan can do this--->
-<!-- - *Stochastic optimisation* by representing only a subgraph of the full model: this allows Stochastic Variational Inference etc. -->
+
+
 
 ## Edward Philosophy 
 
@@ -324,12 +324,12 @@ inference = ed.Inference(latent_vars={w_0: qw_0, b_0: qb_0,
 >- <div class = "blue2"> **This abstraction can represent a broad class of inference algorithms** </div>
 
 
-<!--Graves (2011) considers a similar problem for neural networks, but a lack of control variates limits the algorithm to significantly simpler variational approximation. (Paisley et al 2012 -->
+<!--Graves (2011) considers a similar problem for neural networks, but a lack of control variates limits the algorithm to significantly simpler variational approximation. (Paisley et al 2012) -->
 
 ## Variational Inference | Recasting Bayesian inference as optimisation
 
-- Approximate the posterior $p(\mathbf{w} \vert \mathbf{X, Y})$ with a simpler distribution from a variational family of distributions $q_{\theta}(\mathbf{w})$ parameterised by $\theta$ <!--C Naesseth 2017 -->
-<!--Gal 2.1.1 and Dropout preso-->
+- Approximate the posterior $p(\mathbf{w} \vert \mathbf{X, Y})$ with a simpler distribution from a variational family of distributions $q_{\theta}(\mathbf{w})$ parameterised by $\theta$ 
+
 
 - **Minimise** the Kullback-Leibler (KL) divergence between **approximate** posterior $q_{\theta}(\mathbf{w})$ and the **actual** posterior $p(\mathbf{w} \vert \mathbf{X, Y})$ w.r.t. $\theta$
 
@@ -375,8 +375,8 @@ $$\text{ELBO} = \underbrace{\mathbb{E}_{q_{\theta}}[\log p(\mathbf{x} \vert \mat
 
 For a Bayesian neural network, this objective is:
 $$\mathcal{L}_{VI}(\theta) = \int q_{\theta}(\mathbf{w})\text{ log } p(\mathbf{Y} \vert {\mathbf{X, \mathbf{w}}})d\mathbf{w} - \text{KL } (q_{\theta}(\mathbf{w}) \| p(\mathbf{w})) $$ 
-<!--Explain how this enforces Occam's razor, penalises model complexity -->
-<!--Explain how this is a lower bound on the evidence: log p(x) = KL( q(z) || p(z|x) ) + ELBO(q) -->
+<!--This enforces Occam's razor, penalises model complexity -->
+<!--This is a lower bound on the evidence: log p(x) = KL( q(z) || p(z|x) ) + ELBO(q) -->
  
  
 <!--Optimising the Lower Bound-->
@@ -385,19 +385,19 @@ $$\mathcal{L}_{VI}(\theta) = \int q_{\theta}(\mathbf{w})\text{ log } p(\mathbf{Y
 <!-- - An unbiased approximation of the gradient of the ELBO allows stochastic gradient descent to scalably learn complex models--> <!--Duvenaud 2017-->
 - **Optimise** the ELBO <!--see BBVI paper, pg 2 -->: need unbiased estimator of its **gradient** 
 
-<!-- Need an approximation of  **Expected Log Likelihood** $\int q_{\theta}\text{ log } p(\mathbf{Y} \vert {\mathbf{X, \mathbf{w}}})d\mathbf{w}$ and its **gradient** --> <!--check this--> 
+<!-- Need an approximation of  **Expected Log Likelihood** $\int q_{\theta}\text{ log } p(\mathbf{Y} \vert {\mathbf{X, \mathbf{w}}})d\mathbf{w}$ and its **gradient**  
 
->- **Gradient of ELBO**: estimate using Monte Carlo sampling from the variational posterior $q_{\theta}(\mathbf{w})$ *(score functions, reparameterisation trick)*  <!-- need to clarify that this holds for the case of reparameterization trick-->
+>- **Gradient of ELBO**: estimate using Monte Carlo sampling from the variational posterior $q_{\theta}(\mathbf{w})$ *(score functions, reparameterisation trick)*  
     
 <!-- >- For **normal** distributions, the KL prior term can be computed **analytically** -->
 
 >- No assumptions made about underlying model: 'black box' approach for **scalable** learning of complex models
     
-<!-- read some text about stochastic gradients -->
+
 
 >- <div class = "red2"> Problem: high variance of Monte Carlo estimator of the gradient! </div> 
 
- <!-- *Variational Inference: A Review for Statisticians (2016)* -->
+
 
 ## Black Box Variational Inference with Edward
 <!-- https://github.com/blei-lab/edward/blob/master/edward/inferences/klqp.py -->
@@ -428,7 +428,7 @@ $$\mathcal{L}_{VI}(\theta) = \int q_{\theta}(\mathbf{w})\text{ log } p(\mathbf{Y
      +   Reparameterization gradients (Kingma and Welling, 2014, Rezende et al., 2014) of the loss function. -->
 
 <!--One of the main recent advances has been the  development  of  variational  autoencoders  along  with the reparameterization trick   (Kingma & Welling, 2013;
-Rezende et al., 2014). The reparameterization trick is applicable to most continuous latent-variable models, and usually provides lower-variance gradient estimates - Duvenaud et al (2017) --> 
+Rezende et al., 2014). The reparameterization trick is applicable to most continuous latent-variable models, and usually provides lower-variance gradient estimates - Roeder et al (2017) --> 
 
 
 
@@ -442,7 +442,7 @@ $$ -\sum_{n=1}^{N} \int q(\mathbf{w}) \text{log}(p(\mathbf{y}_{n}\vert \mathbf{x
  
 <!-- See 'Sticking the Landing: An Asymptotically Zero-Variance Estimator for Variational Inference - G Roeder, Y Wu and D Duvenaud arXiv:1703.09194v2' for interesting new results on ... --> 
   
-<!-- what about gradient estimation>-->
+
 
 <!--each row of our weight matrices distributes according to p(w) (where this actually appears in the covariance function for GPs in Gal).  Rows of the matrices correspond to frequencies in the sparse spectrum GP aproximation. -->
 
@@ -581,7 +581,7 @@ Highly competitive results for
 
 ![](charts/LL_table.png)
 
-<!-- Duplicate this slide to bring in results incrementally, n=50 then n=10-->
+
 
 ## Model-Specific versus Black Box 
 
